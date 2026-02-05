@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
@@ -12,10 +13,13 @@ connectDB();
 // middleware
 app.use(express.json());
 
-// test route
+// health check / test route
 app.get("/", (req: Request, res: Response) => {
   res.send("Facilitator backend running (TypeScript)");
 });
+
+// auth routes
+app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
