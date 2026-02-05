@@ -1,6 +1,13 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema, Document } from "mongoose";
 
-const messageSchema = new mongoose.Schema(
+export interface IMessage extends Document {
+  conversationId: mongoose.Types.ObjectId;
+  speaker: string;
+  content: string;
+  orderIndex: number;
+}
+
+const messageSchema: Schema<IMessage> = new Schema(
   {
     conversationId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -23,4 +30,4 @@ const messageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Message", messageSchema);
+export default mongoose.model<IMessage>("Message", messageSchema);
