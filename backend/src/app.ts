@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
 import authRoutes from "./routes/authRoutes";
+import conversationRoutes from "./routes/conversationRoutes";
 
 dotenv.config();
 
@@ -20,6 +21,9 @@ app.get("/", (req: Request, res: Response) => {
 
 // auth routes
 app.use("/api/auth", authRoutes);
+
+// conversation routes (PROTECTED)
+app.use("/api/conversations", conversationRoutes);
 
 const PORT = process.env.PORT || 5000;
 
